@@ -25,4 +25,9 @@ public class MeasurementController {
     public List<Measurement> getAll() {
         return service.getAll();
     }
+    @PostMapping
+    public String addMeasurement(@ModelAttribute Measurement m) {
+        service.save(m);
+        return "redirect:/measurements-page";
+}
 }
