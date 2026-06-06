@@ -53,3 +53,4 @@ public class PageController {
         measurementService.save(m);
         return "redirect:/measurements";
     }
+}
