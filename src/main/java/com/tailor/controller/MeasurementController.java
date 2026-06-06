@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/measurements")
+@RequestMapping("/api/measurements")
 public class MeasurementController {
 
     private final MeasurementService service;
@@ -16,18 +16,14 @@ public class MeasurementController {
         this.service = service;
     }
 
+    // ✅ JSON API (Postman)
     @PostMapping
     public Measurement add(@RequestBody Measurement m) {
-        return service.add(m);
+        return service.save(m);
     }
 
     @GetMapping
     public List<Measurement> getAll() {
         return service.getAll();
     }
-    @PostMapping
-    public String addMeasurement(@ModelAttribute Measurement m) {
-        service.save(m);
-        return "redirect:/measurements-page";
-}
 }
