@@ -9,27 +9,19 @@ public class Measurement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long customerId;
-
-    private double shirtLength;
-    private double sleeveLength;
-    private double waist;
-    private double pantLength;
-
-    public Measurement() {}
+    private Double chest;
+    private Double waist;
+    private Double sleeve;
 
     public Long getId() { return id; }
-
-    public Long getCustomerId() { return customerId; }
-    public double getShirtLength() { return shirtLength; }
-    public double getSleeveLength() { return sleeveLength; }
-    public double getWaist() { return waist; }
-    public double getPantLength() { return pantLength; }
-
     public void setId(Long id) { this.id = id; }
-    public void setCustomerId(Long customerId) { this.customerId = customerId; }
-    public void setShirtLength(double shirtLength) { this.shirtLength = shirtLength; }
-    public void setSleeveLength(double sleeveLength) { this.sleeveLength = sleeveLength; }
-    public void setWaist(double waist) { this.waist = waist; }
-    public void setPantLength(double pantLength) { this.pantLength = pantLength; }
+
+    public Double getChest() { return chest; }
+    public void setChest(Double chest) { this.chest = chest; }
+
+    public Double getWaist() { return waist; }
+    public void setWaist(Double waist) { this.waist = waist; }
+
+    public Double getSleeve() { return sleeve; }
+    public void setSleeve(Double sleeve) { this.sleeve = sleeve; }
 }
