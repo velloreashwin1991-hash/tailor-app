@@ -1,41 +1,55 @@
 package com.tailor.controller;
 
+import com.tailor.model.Customer;
 import com.tailor.model.Measurement;
+import com.tailor.service.CustomerService;
 import com.tailor.service.MeasurementService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PageController {
 
-    private final MeasurementService service;
+    private final CustomerService customerService;
+    private final MeasurementService measurementService;
 
-    public PageController(MeasurementService service) {
-        this.service = service;
+    public PageController(CustomerService customerService,
+                          MeasurementService measurementService) {
+        this.customerService = customerService;
+        this.measurementService = measurementService;
     }
 
-    // 🏠 Home page
+    // HOME PAGE
     @GetMapping("/")
     public String home() {
         return "index";
     }
 
-    // 👤 Customers page
-    @GetMapping("/customers-page")
-    public String customersPage() {
+    // CUSTOMER PAGE
+    @GetMapping("/customers")
+    public String customerPage(Model model) {
+        model.addAttribute("customer", new Customer());
+        model.addAttribute("customers", customerService.getAll());
         return "customers";
     }
 
-    // 📏 Measurements page (GUI PAGE)
-    @GetMapping("/measurements-page")
-    public String measurementsPage() {
+    @PostMapping("/customers/save")
+    public String saveCustomer(@ModelAttribute Customer customer) {
+        customerService.save(customer);
+        return "redirect:/customers";
+    }
+
+    // MEASUREMENT PAGE
+    @GetMapping("/measurements")
+    public String measurementPage(Model model) {
+        model.addAttribute("measurement", new Measurement());
+        model.addAttribute("measurements", measurementService.getAll());
         return "measurements";
     }
 
-    // 📏 Save measurement from FORM (GUI submit)
-    @PostMapping("/measurements-page")
-    public String addMeasurement(@ModelAttribute Measurement m) {
-        service.save(m);
-        return "redirect:/measurements-page";
+    @PostMapping("/measurements/save")
+    public String saveMeasurement(@ModelAttribute Measurement m) {
+        measurementService.save(m);
+        return "redirect:/measurements";
     }
-}
