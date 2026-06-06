@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Customers</title>
 </head>
@@ -7,11 +7,21 @@
 
 <h2>Add Customer</h2>
 
-<form action="/customers" method="post">
-    Name: <input type="text" name="name"><br><br>
-    Phone: <input type="text" name="phone"><br><br>
+<form action="/customers/save" method="post">
+    Name: <input type="text" name="name"><br>
+    Phone: <input type="text" name="phone"><br>
     <button type="submit">Save</button>
 </form>
 
-</body>
-</html>
+<h2>Customer List</h2>
+
+<table border="1">
+    <tr>
+        <th>ID</th><th>Name</th><th>Phone</th>
+    </tr>
+    <tr th:each="c : ${customers}">
+        <td th:text="${c.id}"></td>
+        <td th:text="${c.name}"></td>
+        <td th:text="${c.phone}"></td>
+    </tr>
+</table>
