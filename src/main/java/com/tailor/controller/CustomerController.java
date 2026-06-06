@@ -25,4 +25,9 @@ public class CustomerController {
     public List<Customer> getAll() {
         return service.getAll();
     }
+    @PostMapping
+    public String addCustomer(@ModelAttribute Customer c) {
+        service.save(c);
+        return "redirect:/customers-page";
+}
 }
